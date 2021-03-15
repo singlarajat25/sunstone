@@ -1,1 +1,1 @@
-# faculty-student
+# school-portal
