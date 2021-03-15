@@ -1,0 +1,41 @@
+<nav class="navbar-default navbar-static-side nav-cst" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">  
+            <div class="logo-web">
+                <a href="/"> 
+                    <center>
+                    <h1> School Portal </h1>
+                </center>  
+                </a>    
+            </div>                 
+            </li>
+            <li class="header-space <%= (activeBar == 'dashboard') ? 'active' : '' %>">
+                <a href="/">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i> 
+                    <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+            <li class="<%= (activeBar == 'subject') ? 'active' : '' %>">
+                <a href="/subject-management">
+                    <i class="fa fa-book " aria-hidden="true"></i> 
+                    <span class="nav-label">Subject Management</span>
+                </a>
+            </li>
+            <li class="<%= (activeBar == 'user') ? 'active' : '' %>">
+                <a href="/user-management">
+                    <i class="fa fa-user" aria-hidden="true"></i> 
+                    <span class="nav-label">User Management</span>
+                </a>
+            </li>
+            <!-- <li class="<%= (activeBar == 'faculty') ? 'active' : '' %>">
+                <a href="/faculty-management">
+                    <i class="fa fa-user" aria-hidden="true"></i> 
+                    <span class="nav-label">Faculty Management</span>
+                </a>
+            </li> -->
+            
+        </ul>
+
+    </div>
+</nav>

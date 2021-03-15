@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+
+<head>
+
+    <%- include('./partials/style.ejs') %>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('./partials/menu.ejs') %>
+
+            <!-- side bar end -->
+            <div id="page-wrapper" class="gray-bg">
+                <!-- top nav start -->
+                <%- include('./partials/header.ejs') %>
+
+                    <!-- top nav end -->
+                    <div class="wrapper wrapper-content profile-page">
+                        <div class="ibox ">
+                            <div class="ibox-title d-flex justify-content-between align-items-center meta-title">
+                                <h5>User Management</h5>
+                                <!-- <div class="d-flex justify-content-end" id="createRoleButton"> -->
+                                <a href="#!" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#createFaculty">Create User</a>
+                                <!-- </div><br /> -->
+
+                            </div>
+                            <div class="ibox-content ">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover"
+                                                id="studentTable" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                        <th>Name</th>
+                                                        <th>Phone</th>
+                                                        <th>Gender</th>
+                                                        <th>Action</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for(let i=0; i < list.length; i++) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= list[i].email %>
+                                                            </td>
+                                                            <td>
+                                                                <%= list[i].role %>
+                                                            </td>
+                                                            <td>
+                                                                <%= list[i].firstName %>  <%= list[i].lastName %>
+                                                            </td>
+                                                            <td>
+                                                                <%= list[i].phone %>
+                                                            </td>
+                                                            <td>
+                                                                <%= list[i].gender %>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:"
+                                                                    onclick="getUser('<%= list[i].email %>')"><i
+                                                                        class="fa fa-edit"></i></a>
+                                                                <a href="javascript:"
+                                                                    onclick="deleteStudent('<%= list[i].email %>')"><i
+                                                                        class="fa fa-trash"></i></a>
+                                                                <a href="javascript:"
+                                                                    onclick="viewStudent('<%= list[i].email %>')"><i
+                                                                        class="fa fa-eye"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+    </div>
+    <div class="modal fade" id="createFaculty" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered createTeam" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="title">Create User</h3>
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form id="createSubjectForm">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Enter Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Firstname</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                    placeholder="Enter FirstName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Lastname</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                    placeholder="Enter LastName">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">phone</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="phone" name="phone"
+                                    placeholder="Enter phone">
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Gender</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="gender" class="form-control">
+                                    <option value=""></option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Role</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="role" class="form-control">
+                                    <option value=""></option>
+                                    <option value="student">student</option>
+                                    <option value="faculty">faculty</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Subject List</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="subject" name="subject" multiple class="form-control">
+                                    <% for(let i=0; i < subjectList.length; i++) { %>
+                                        <option value="<%= subjectList[i]._id %>"> <%= subjectList[i].name %> </option>
+                                        <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-sm-3 col-6">
+                                <input class="btn btn-primary btn-block" type="button" aria-label="Create"
+                                    value="Create" onclick="createStudent()">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editFaculty" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered createTeam" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="title">Edit User</h3>
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form id="editUserForm">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email_edit" name="email_edit" disabled
+                                    placeholder="Enter Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Firstname</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="firstName_edit" name="firstName_edit"
+                                    placeholder="Enter FirstName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Lastname</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="lastName_edit" name="lastName_edit"
+                                    placeholder="Enter LastName">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">phone</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="phone_edit" name="phone_edit"
+                                    placeholder="Enter phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Gender</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="gender_edit" class="form-control">
+                                    <option value=""></option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Role</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="role_edit" class="form-control">
+                                    <option value=""></option>
+                                    <option value="student">student</option>
+                                    <option value="faculty">faculty</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Subject List</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="subject_edit" name="subject_edit" multiple class="form-control">
+                                    <% for(let i=0; i < subjectList.length; i++) { %>
+                                        <option value="<%= subjectList[i]._id %>"> <%= subjectList[i].name %> </option>
+                                        <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-sm-3 col-6">
+                                <input class="btn btn-primary btn-block" type="button" aria-label="Edit"
+                                    value="Edit" onclick="editUser()">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- wrapper end -->
+    <%- include('./partials/footer.ejs') %>
+
+        <!-- footer end -->
+        </div>
+        <!-- #page-wrapper end -->
+        </div>
+        <!-- #main wrapper end -->
+        <!-- Mainly scripts -->
+
+
+        <%- include('./partials/script.ejs') %>
+
+            <script src="/js/custom/studentManagement.js"></script>
+</body>
+
+</html> 

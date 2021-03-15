@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('./partials/style.ejs') %>
+<!-- style -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- side bar-->
+        <%- include('./partials/menu.ejs') %>
+        <!-- side bar end -->
+        <div id="page-wrapper" class="gray-bg">
+            <!-- Navigation -->
+            <%- include('./partials/header.ejs') %>
+            <div class="wrapper wrapper-content">
+              
+                </div>
+                <div class="row align-items-center">
+                  
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <i class="fa fa-book fa-4x"></i>
+                                <h3 class="font-bold no-margins">
+                                    <%= subjectCount %> Subject On Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <i class="fa fa-user fa-4x"></i>
+                                <h3 class="font-bold no-margins">
+                                    <%= facultyCount %> Faculty On Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <i class="fa fa-user fa-4x"></i>
+                                <h3 class="font-bold no-margins">
+                                    <%= studentCount %> Student On Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <!-- card-row end -->
+            
+            </div>
+            <!-- wrapper end -->
+            <%- include('./partials/footer.ejs') %>
+            <!-- footer end -->
+        </div>
+        <!-- #page-wrapper end -->
+    </div>
+    <!-- #main wrapper end -->
+    <%- include('./partials/script.ejs') %>
+    <script src="/js/moment.js"></script>
+</body>
+</html>
